@@ -1,7 +1,7 @@
 import socket
 import datetime
 from django.conf import settings
-from django.core.cache import DEFAULT_CACHE_ALIAS, caches, cache
+from django.core.cache import caches, cache
 from django.utils.cache import (
     get_cache_key,
     get_max_age,

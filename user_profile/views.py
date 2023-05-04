@@ -8,17 +8,16 @@ from rest_framework.generics import (
     RetrieveAPIView,
     CreateAPIView,
     GenericAPIView,
-    RetrieveUpdateAPIView,
     UpdateAPIView,
 )
-from rest_framework.exceptions import PermissionDenied, NotAcceptable, ValidationError
+from rest_framework.exceptions import NotAcceptable
 
 from allauth.account.views import ConfirmEmailView
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from allauth.socialaccount.providers.twitter.views import TwitterOAuthAdapter
 from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
-from rest_auth.registration.views import SocialConnectView, SocialLoginView
+from rest_auth.registration.views import SocialLoginView
 from rest_auth.social_serializers import TwitterConnectSerializer
 from allauth.account.models import EmailAddress, EmailConfirmationHMAC
 from rest_auth.views import (
@@ -26,7 +25,6 @@ from rest_auth.views import (
     PasswordResetView,
     PasswordResetConfirmView,
     PasswordChangeView,
-    LogoutView,
 )
 from rest_auth.serializers import PasswordResetConfirmSerializer
 from rest_auth.registration.views import RegisterView, VerifyEmailView
@@ -35,7 +33,7 @@ from rest_auth.app_settings import JWTSerializer
 from rest_auth.utils import jwt_encode
 from django.views.decorators.debug import sensitive_post_parameters
 from django.utils.decorators import method_decorator
-from django.contrib.auth.models import User, Permission
+from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from .models import Profile, Address, SMSVerification, DeactivateUser, NationalIDImage
 from .serializers import (
@@ -46,12 +44,11 @@ from .serializers import (
     SMSVerificationSerializer,
     SMSPinSerializer,
     DeactivateUserSerializer,
-    PermissionSerializer,
     PasswordChangeSerializer,
     UserPermissionSerializer,
     NationalIDImageSerializer,
 )
-from .send_mail import send_register_mail, send_reset_password_email
+from .send_mail import send_reset_password_email
 
 sensitive_post_parameters_m = method_decorator(
     sensitive_post_parameters("password1", "password2")

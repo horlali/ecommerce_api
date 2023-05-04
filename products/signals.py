@@ -1,4 +1,3 @@
-from django.db.models.signals import ModelSignal
 from django.dispatch import Signal
 
 

@@ -1,5 +1,4 @@
 """ Here write a code of viewsets """
-from rest_framework import viewsets
 from drf_haystack.viewsets import HaystackViewSet
 from .models import Product
 from .serializers import ProductIndexSerializer

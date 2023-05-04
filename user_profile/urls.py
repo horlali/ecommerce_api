@@ -3,13 +3,8 @@ from . import views
 from django.views.generic import TemplateView
 from rest_framework import routers
 from rest_auth.views import (
-    LoginView,
-    PasswordResetView,
-    PasswordResetConfirmView,
-    PasswordChangeView,
     LogoutView,
 )
-from rest_auth.registration.views import RegisterView, VerifyEmailView
 
 router = routers.DefaultRouter()
 router.register('ids', views.NationalIDImageViewSet)

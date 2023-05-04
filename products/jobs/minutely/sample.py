@@ -1,4 +1,4 @@
-from django_extensions.management.jobs import BaseJob, MinutelyJob
+from django_extensions.management.jobs import MinutelyJob
 
 
 # class Job(BaseJob):

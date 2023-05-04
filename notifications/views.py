@@ -1,4 +1,3 @@
-from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView, RetrieveDestroyAPIView
 from rest_framework import permissions, status
@@ -10,10 +9,8 @@ from fcm_django.models import FCMDevice
 from .models import Notification
 from .serializers import (
     FCMDeviceSerializer,
-    NotificationSerializer,
     NotificationMiniSerializer,
 )
-from .permissions import IsOwner
 
 
 class NotificationListView(ListAPIView):

@@ -1,21 +1,14 @@
 from django.shortcuts import get_object_or_404
-from rest_framework.generics import (
-    ListAPIView,
-    RetrieveAPIView,
-    CreateAPIView,
-    DestroyAPIView,
-)
 from rest_framework import permissions, status
-from rest_framework.exceptions import PermissionDenied, NotAcceptable, ValidationError
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from cart.models import Cart, CartItem
+from cart.serializers import CartItemMiniSerializer
 from products.models import Product
 from products.serializers import ProductDetailSerializer
 from user_profile.models import Address
 from user_profile.serializers import AddressSerializer
-from cart.models import Cart, CartItem
-from cart.serializers import CartItemMiniSerializer
 
 
 class CheckoutView(APIView):
@@ -62,4 +55,3 @@ class CheckoutCartView(APIView):
         data["total"] = end_total
         data["feez"] = ecommerce_feez
         return Response(data, status=status.HTTP_200_OK)
-

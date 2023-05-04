@@ -2,22 +2,18 @@ import logging
 from datetime import datetime, timezone, timedelta
 from django.db import models
 from django.contrib.auth import get_user_model
-from django.db.models.signals import post_save, pre_save
+from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.conf import settings
 from django.core.cache import cache
-from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
-from rest_framework.authtoken.models import Token
+from django.core.validators import MinValueValidator
 from rest_framework.exceptions import NotAcceptable
-from allauth.account.signals import user_signed_up
 from phonenumber_field.modelfields import PhoneNumberField
 from django_countries.fields import CountryField
 from randompinfield import RandomPinField
-import phonenumbers
 from twilio.rest import Client
 from twilio.base.exceptions import TwilioRestException
 
-from .signals import register_signal
 from .managers import NationalIDImageManager
 from core.models import TimeStampedModel
 from core.handle_images import compress_image
@@ -130,7 +126,7 @@ class SMSVerification(TimeStampedModel):
             logging.warning("Twilio credentials are not set")
 
     def confirm(self, pin):
-        if pin == self.pin and self.verified == False:
+        if pin == self.pin and self.verified is False:
             self.verified = True
             self.save()
         else:

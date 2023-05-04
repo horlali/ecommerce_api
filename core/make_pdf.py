@@ -1,4 +1,3 @@
-from PyPDF2 import PdfFileWriter, PdfFileReader
 import os
 
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -9,7 +8,6 @@ PWD = "/Users/admin/Desktop/API_ENV/ecommerce/pdf_files"
 
 
 def write_new_pdf(filename, data={}):
-
     path = os.path.join(PWD + "/" + str(filename) + ".pdf")
 
     if data:
@@ -22,4 +20,3 @@ def write_new_pdf(filename, data={}):
 
 n = {"thomas": "3", "adel": "5", "saeed": "10"}
 write_new_pdf("example", n)
-

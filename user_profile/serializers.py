@@ -5,7 +5,6 @@ from rest_framework import serializers, exceptions
 from phonenumber_field.serializerfields import PhoneNumberField
 from rest_auth.registration.serializers import RegisterSerializer
 from rest_framework.validators import UniqueValidator
-from rest_framework.exceptions import ValidationError
 from drf_extra_fields.fields import Base64ImageField
 from django.contrib.auth.models import Permission
 from django.utils.translation import ugettext_lazy as _

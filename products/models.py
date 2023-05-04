@@ -1,10 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from django.db.models.signals import post_save, post_delete
-from django.dispatch import receiver
 from core.models import TimeStampedModel, Extensions
 from mptt.models import MPTTModel, TreeForeignKey
-from .signals import post_signal
 
 User = get_user_model()
 

@@ -2,11 +2,6 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from rest_framework_jwt.views import (
-    obtain_jwt_token,
-    refresh_jwt_token,
-    verify_jwt_token,
-)
 from rest_framework.routers import DefaultRouter
 from fcm_django.api.rest_framework import (
     FCMDeviceAuthorizedViewSet,

@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 from .models import DeactivateUser
 from django.contrib.auth import get_user_model
 
@@ -12,7 +12,7 @@ def schedule_deactivate_user():
     for deactive in deactivates:
         user_deactivate = deactive.user.deactivate.deactive
         created = deactive.user.deactivate.created
-        if user_deactivate == True and (now - created).total_seconds() > 2592000:
+        if user_deactivate is True and (now - created).total_seconds() > 2592000:
             deactive.user.is_active = False
             deactive.user.save()
             # TODO send mail for user tell him his account not active

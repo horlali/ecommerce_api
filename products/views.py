@@ -2,9 +2,6 @@ import logging
 import json
 import requests
 
-from django.core.cache import cache
-from django.conf import settings
-from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
@@ -17,7 +14,7 @@ from rest_framework.generics import (
     DestroyAPIView,
 )
 from rest_framework import permissions, status
-from rest_framework.exceptions import PermissionDenied, NotAcceptable, ValidationError
+from rest_framework.exceptions import PermissionDenied, NotAcceptable
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
@@ -25,7 +22,6 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from rest_framework import viewsets
 
-from django_elasticsearch_dsl_drf.constants import LOOKUP_FILTER_GEO_DISTANCE
 from django_elasticsearch_dsl_drf.filter_backends import (
     FilteringFilterBackend,
     OrderingFilterBackend,
@@ -33,9 +29,9 @@ from django_elasticsearch_dsl_drf.filter_backends import (
     DefaultOrderingFilterBackend,
 )
 
-from django_elasticsearch_dsl_drf.viewsets import DocumentViewSet, BaseDocumentViewSet
+from django_elasticsearch_dsl_drf.viewsets import DocumentViewSet
 
-from .models import Category, Product, ProductViews, User
+from .models import Category, Product, ProductViews
 from .serializers import (
     CategoryListSerializer,
     ProductSerializer,
@@ -43,13 +39,11 @@ from .serializers import (
     CreateProductSerializer,
     ProductViewsSerializer,
     ProductDetailSerializer,
-    ProductMiniSerializer,
     ProductDocumentSerializer,
 )
 from .documents import ProductDocument
 from .permissions import IsOwnerAuth, ModelViewSetsPermission
 from notifications.utils import push_notifications
-from notifications.twilio import send_message
 from core.decorators import time_calculator
 
 from googletrans import Translator
@@ -334,7 +328,6 @@ class GETRequests(APIView):
 class POSTRequests(APIView):
     def post(self, request, *args, **kwargs):
         url = "http://127.0.0.1:8000/micro/create/"
-        content_type = "application/json; charset=utf-8"
         data = {
             "id": 60,
             "seller": "tomas",
@@ -344,7 +337,7 @@ class POSTRequests(APIView):
             "quantity": 9,
             "views": 100,
         }
-        response = requests.post(url, data=data)
+        requests.post(url, data=data)
         # json_content = json.loads(response.content)
         # print(response.json())
         return Response("Success")

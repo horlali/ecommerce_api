@@ -1,7 +1,8 @@
 #!/usr/bin/python
-import socket, videosocket
+import socket
+
+import videosocket
 from videofeed import VideoFeed
-import time
 
 
 class Server:
@@ -18,7 +19,6 @@ class Server:
             print("I got a connection from ", address)
             vsock = videosocket.videosocket(client_socket)
             while True:
-
                 frame = vsock.vreceive()
                 self.videofeed.set_frame(frame)
                 frame = self.videofeed.get_frame()

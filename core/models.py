@@ -1,5 +1,7 @@
 import uuid
+
 from django.db import models
+
 from .managers import SoftDeleteManager
 
 
@@ -23,7 +25,7 @@ class Extensions(models.Model):
 
 
 class UUIDModel(models.Model):
-    """ 
+    """
     Best practice for lookup field url instead pk or slug.
     for security
     """

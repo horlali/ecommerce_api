@@ -1,11 +1,10 @@
 from django.shortcuts import get_object_or_404
 from rest_framework.generics import (
     ListCreateAPIView,
-    ListAPIView,
     RetrieveUpdateDestroyAPIView,
 )
 from .serializers import CartItemSerializer, CartItemUpdateSerializer
-from rest_framework import permissions, status
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.exceptions import NotAcceptable, ValidationError, PermissionDenied
 from django.utils.translation import ugettext_lazy as _
@@ -37,7 +36,7 @@ class CartItemAPIView(ListCreateAPIView):
 
         try:
             quantity = int(request.data["quantity"])
-        except Exception as e:
+        except Exception:
             raise ValidationError("Please Enter Your Quantity")
 
         if quantity > product.quantity:
@@ -82,7 +81,7 @@ class CartItemView(RetrieveUpdateDestroyAPIView):
 
         try:
             quantity = int(request.data["quantity"])
-        except Exception as e:
+        except Exception:
             raise ValidationError("Please, input vaild quantity")
 
         if quantity > product.quantity:

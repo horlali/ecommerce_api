@@ -1,5 +1,4 @@
 from twilio.rest import Client
-from twilio.base.exceptions import TwilioRestException
 from decouple import config
 
 
