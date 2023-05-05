@@ -2,13 +2,13 @@
 # requires a recent enough python with idna support in socket
 # pyopenssl, cryptography and idna
 
-from OpenSSL import SSL
+from collections import namedtuple
+from socket import socket
+
+import idna
 from cryptography import x509
 from cryptography.x509.oid import NameOID
-import idna
-
-from socket import socket
-from collections import namedtuple
+from OpenSSL import SSL
 
 HostInfo = namedtuple(field_names="cert hostname peername", typename="HostInfo")
 
@@ -99,9 +99,9 @@ def check_it_out(hostname, port):
     print_basic_info(hostinfo)
 
 
-import concurrent.futures
-
 if __name__ == "__main__":
-    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as e:
+    from concurrent import futures
+
+    with futures.ThreadPoolExecutor(max_workers=4) as e:
         for hostinfo in e.map(lambda x: get_certificate(x[0], x[1]), HOSTS):
             print_basic_info(hostinfo)
