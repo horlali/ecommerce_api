@@ -352,3 +352,6 @@ USER_ONLINE_TIMEOUT = 10
 # their last seen is removed from the cache
 USER_LASTSEEN_TIMEOUT = 60 * 60 * 24 * 7
 USER_LASTSEEN_TIMEOUT = 60 * 60 * 24 * 7
+
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

@@ -1,15 +1,16 @@
-from django.contrib.auth import get_user_model, authenticate
+from allauth.account.models import EmailAddress
 from django.conf import settings
+from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.forms import SetPasswordForm
-from rest_framework import serializers, exceptions
-from phonenumber_field.serializerfields import PhoneNumberField
-from rest_auth.registration.serializers import RegisterSerializer
-from rest_framework.validators import UniqueValidator
-from drf_extra_fields.fields import Base64ImageField
 from django.contrib.auth.models import Permission
 from django.utils.translation import ugettext_lazy as _
-from allauth.account.models import EmailAddress
-from .models import Profile, Address, SMSVerification, DeactivateUser, NationalIDImage
+from drf_extra_fields.fields import Base64ImageField
+from phonenumber_field.serializerfields import PhoneNumberField
+from rest_auth.registration.serializers import RegisterSerializer
+from rest_framework import exceptions, serializers
+from rest_framework.validators import UniqueValidator
+
+from .models import Address, DeactivateUser, NationalIDImage, Profile, SMSVerification
 
 # Get the UserModel
 UserModel = get_user_model()
@@ -75,7 +76,8 @@ class LoginSerializer(serializers.Serializer):
                 app_settings.AUTHENTICATION_METHOD
                 == app_settings.AuthenticationMethod.EMAIL
             ):
-                user = self._validate_email(email, password)
+                # user = self._validate_email(email, password)
+                user = self._validate_email(username, password)
 
             # Authentication through username
             elif (
@@ -86,7 +88,8 @@ class LoginSerializer(serializers.Serializer):
 
             # Authentication through either username or email
             else:
-                user = self._validate_username_email(username, email, password)
+                # user = self._validate_username_email(username, email, password)
+                user = self._validate_username_email(username, password)
 
         else:
             if username:
@@ -333,4 +336,4 @@ class UserPermissionSerializer(serializers.ModelSerializer):
 class NationalIDImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = NationalIDImage
-        fields = ("user", "image",)
+        fields = ("user", "image",)        fields = ("user", "image",)
